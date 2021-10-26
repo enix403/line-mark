@@ -237,6 +237,11 @@ $table-border-color: #45494a;
             font-weight: 600;
         }
     }
+
+    img {
+        max-width: 100%;
+        box-sizing: content-box;
+    }
 }
 
 
