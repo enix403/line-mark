@@ -18,7 +18,7 @@ export const Editor = () => {
   return (
     <div className={cx('editor-main')}>
       <MarkdownInputPane onSourceUpdate={setSource} />
-      <MarkdownPreviewPane source={source}/>
+      <MarkdownPreviewPane source={source} />
     </div>
   );
 };
@@ -86,9 +86,13 @@ class MarkdownInputPane extends React.Component<IMarkdownInputPane, any> {
 
 const mdit = new MarkdownIt();
 
+type RenderOutputType = 'html' | 'view';
 
-const MarkdownPreviewPane: React.FC<{source: string}> = ({source}) => {
+const MarkdownPreviewPane: React.FC<{
+  source: string
+}> = ({ source }) => {
 
+  const [previewType, setPreviewType] = React.useState<RenderOutputType>('view');
   const [renderedMarkup, setRenderedMarkup] = React.useState<string>();
 
   useEffect(() => {
@@ -108,19 +112,32 @@ const MarkdownPreviewPane: React.FC<{source: string}> = ({source}) => {
           inline={true}
           className={cx("preview-selectbox", 'bp3-dark')}
         >
-          <HTMLSelect minimal={true}>
-            <option value='md'>Rendered Markdown</option>
+          <HTMLSelect
+            minimal={true}
+            value={previewType}
+            onChange={e => setPreviewType(e.target.value as RenderOutputType)}
+          >
+            <option value='view'>Rendered Markdown</option>
             <option value='html'>HTML</option>
           </HTMLSelect>
         </FormGroup>
       </div>
 
 
-      <div
-        dangerouslySetInnerHTML={{ __html: renderedMarkup || '' }}
-        className={cx('preview-type-md')}
-      />
+      {previewType == 'html' ?
+        <div className={cx('preview-area', 'preview-type-html')}>
+          <pre>
+            <code>
+              {renderedMarkup}
+            </code>
+          </pre>
+        </div> :
 
+        <div
+          dangerouslySetInnerHTML={{ __html: renderedMarkup || '' }}
+          className={cx('preview-area', 'preview-type-md')}
+        />
+      }
 
     </div>
   );
