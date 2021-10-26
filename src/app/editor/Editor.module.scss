@@ -1,7 +1,12 @@
+@use "sass:color";
+
 $panes-border-color: #363B3D;
 $bg-color: #181A1B;
 $fg-color: rgb(212, 209, 203);
 // $panes-border-color: #e8e8e8;
+
+$heading-border-color: #45494a;
+$table-border-color: #45494a;
 
 .editor-main {
     flex: 1;
@@ -110,13 +115,13 @@ $fg-color: rgb(212, 209, 203);
     h1 {
         padding-bottom: .3em;
         font-size: 2em;
-        border-bottom: 1px solid #45494a;
+        border-bottom: 1px solid $heading-border-color;
     }
 
     h2 {
         padding-bottom: .3em;
         font-size: 1.5em;
-        border-bottom: 1px solid #45494a;
+        border-bottom: 1px solid $heading-border-color;
     }
 
     h1, h2, h3, h4, h5, h6 {
@@ -164,6 +169,10 @@ $fg-color: rgb(212, 209, 203);
         line-height: 1.45;
         border-radius: 6px;
         word-wrap: normal;
+
+        code {
+            margin-right: 16px;
+        }
     }
 
     tt, code:not(pre code) {
@@ -176,6 +185,34 @@ $fg-color: rgb(212, 209, 203);
     tt, code, pre {
         // background-color: #112F2C;
         background-color: #152F39;
+    }
+
+    table {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        overflow: auto;
+        border-spacing: 0;
+        border-collapse: collapse;
+
+
+        tr {
+            background-color: $bg-color;
+            border-top: 1px solid $table-border-color;
+        }
+        tr:nth-child(2n) {
+            background-color: lighten(adjust-hue($bg-color, -10deg), 5%);
+            // background-color: complement($bg-color);
+        }
+
+        th, td {
+            padding: 6px 13px;
+            border: 1px solid $table-border-color;
+        }
+
+        th {
+            font-weight: 600;
+        }
     }
 }
 
