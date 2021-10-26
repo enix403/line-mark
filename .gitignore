@@ -6,4 +6,4 @@ dist-ssr
 
 *.sublime*
 
-/test.md
+/test*.md
