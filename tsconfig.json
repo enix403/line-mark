@@ -1,0 +1,24 @@
+{
+  "extends": "./tsconfig.codestyle.json",
+  "compilerOptions": {
+    "target": "ESNext",
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
+    "module": "ESNext",
+
+    "useDefineForClassFields": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": [ "./*" ]
+    }
+  },
+  "include": [
+    "src"
+  ]
+}

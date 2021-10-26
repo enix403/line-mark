@@ -1,0 +1,81 @@
+.editor-main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: flex-start;
+}
+
+$panes-border-color: #e8e8e8;
+
+@mixin pane-header {
+    width: 100%;
+    min-height: 43px;
+
+    border-style: solid;
+    border-color: $panes-border-color;
+    border-width: 0px 0px 1px 0px;
+
+    padding: 2px 14px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+
+    > .text {
+        color: rgb(182, 175, 166);
+        letter-spacing: -0.2px;
+        font-size: 0.9rem;
+        font-weight: 500;
+
+        text-transform: uppercase;
+    }
+}
+
+
+.markdown-input-pane {
+    flex: 1;
+    border: 0;
+    border-right: 1px solid $panes-border-color;
+
+    .input-header {
+        @include pane-header;
+    }
+
+}
+
+.markdown-preview-pane {
+    flex: 1;
+    .preview-header {
+        @include pane-header;
+    }
+}
+
+.preview-selectbox {
+    margin-left: auto;
+    margin-bottom: 0;
+
+    :global {
+        .bp3-html-select {
+            border: 1px solid rgba(24, 32, 38, 0.2);
+            border-radius: 3px;
+        }
+    }
+}
+
+
+.preview-type-md {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+
+    overflow: scroll;
+
+    padding: 20px 10px;
+
+    font-family: "Fira Sans", sans-serif;
+    font-size: 0.9rem;
+}

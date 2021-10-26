@@ -1,0 +1,99 @@
+/* ============================= */
+/* | Normalizing Html Elements | */
+/* ============================= */
+
+:focus, :focus-visible, :visited  {
+    outline: 0 !important;
+    -moz-outline-style: none !important;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+    font-weight: 500;
+}
+
+a {
+    text-decoration: none;
+    background-color: transparent;
+}
+
+hr {
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+}
+
+table th, table td {
+    white-space: nowrap !important;
+}
+
+/* ============================ */
+/* | BlueprintJS UI Overrides | */
+/* ============================ */
+
+.bp3-html-select:not(.bp3-minimal) select {
+    background-image: none !important;
+}
+
+.bp3-heading {
+    font-weight: 500;
+    margin: 0;
+    padding: 0;
+}
+
+/* ===================== */
+/* | Actual App Styles | */
+/* ===================== */
+
+* {
+    // font-family: 'Roboto', sans-serif;
+}
+
+body {
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 21px !important;
+    background-color: #ffffff;
+    padding: 0;
+    margin: 0;
+}
+
+html, body {
+    overflow: hidden;
+}
+
+#root {
+    min-width: 100vw;
+    min-height: 100vh;
+    width: 100vw;
+    height: 100vh;
+}
+
+.center-text-flow {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.center-everything {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon-text-sm { margin: 0  3px; }
+.icon-text-md { margin: 0  6px; }
+.icon-text-lg { margin: 0 10px; }
+.header-margin-b-l { margin-bottom: 15px; }
+.header-margin-b-m { margin-bottom: 9px; }
+.header-margin-b-s { margin-bottom: 6px; }
