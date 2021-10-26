@@ -1,36 +1,100 @@
+import React, { useEffect } from 'react';
 import styles from './Editor.module.scss';
 import classNames from 'classnames/bind';
 
 import { FormGroup, HTMLSelect, Icon } from '@blueprintjs/core';
 
 import MarkdownIt from 'markdown-it';
+import AceEditor from "react-ace";
+
+import "ace-builds/src-noconflict/mode-markdown";
+import "ace-builds/src-noconflict/theme-gruvbox";
 
 const cx = classNames.bind(styles);
 
 export const Editor = () => {
+  const [source, setSource] = React.useState<string>('');
+
   return (
     <div className={cx('editor-main')}>
-      <MarkdownInputPane />
-      <MarkdownPreviewPane />
+      <MarkdownInputPane onSourceUpdate={setSource} />
+      <MarkdownPreviewPane source={source}/>
     </div>
   );
 };
 
-const MarkdownInputPane = () => {
-  return (
-    <div className={cx('markdown-input-pane')}>
-      <div className={cx('input-header')}>
-        <span className={cx('text', 'center-text-flow')}>
-          <Icon icon="code" />
-          <span className="icon-text-md">Markdown</span>
-        </span>
+interface IMarkdownInputPane {
+  onSourceUpdate: (code: string) => void;
+};
+
+class MarkdownInputPane extends React.Component<IMarkdownInputPane, any> {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      code: "",
+      typingTimeout: 0,
+    };
+  }
+
+  renderMarkdown = () => {
+    this.props.onSourceUpdate(this.state.code);
+  };
+
+  updateCode = (value: string) => {
+    clearTimeout(this.state.typingTimeout);
+    const timeoutId = setTimeout(this.renderMarkdown, 700);
+    this.setState({
+      code: value,
+      typingTimeout: timeoutId
+    });
+  };
+
+  render() {
+    return (
+      <div className={cx('markdown-input-pane')}>
+
+        <div className={cx('input-header')}>
+          <span className={cx('text', 'center-text-flow')}>
+            <Icon icon="code" />
+            <span className="icon-text-md">Markdown</span>
+          </span>
+        </div>
+
+        <AceEditor
+          mode="markdown"
+          theme="gruvbox"
+          value={this.state.code}
+          onChange={this.updateCode}
+          name="Markdown_Input"
+          editorProps={{ $blockScrolling: false }}
+          className={cx('input-editor')}
+          width="100%"
+          style={{ flex: 1, paddingBottom: 400 }}
+          fontSize={12.5}
+          showPrintMargin={false}
+          enableSnippets={false}
+          enableBasicAutocompletion={false}
+          enableLiveAutocompletion={false}
+          wrapEnabled={true}
+        />
+
       </div>
-    </div>
-  );
+    );
+  }
 };
 
+const mdit = new MarkdownIt();
 
-const MarkdownPreviewPane = () => {
+
+const MarkdownPreviewPane: React.FC<{source: string}> = ({source}) => {
+
+  const [renderedMarkup, setRenderedMarkup] = React.useState<string>();
+
+  useEffect(() => {
+    setRenderedMarkup(mdit.render(source));
+  }, [source]);
+
   return (
     <div className={cx('markdown-preview-pane')}>
 
@@ -42,7 +106,7 @@ const MarkdownPreviewPane = () => {
         <FormGroup
           label={<span style={{ fontWeight: 600 }}>Output:</span>}
           inline={true}
-          className={cx("preview-selectbox")}
+          className={cx("preview-selectbox", 'bp3-dark')}
         >
           <HTMLSelect minimal={true}>
             <option value='md'>Rendered Markdown</option>
@@ -52,21 +116,13 @@ const MarkdownPreviewPane = () => {
       </div>
 
 
-      <MDPreview />
+      <div
+        dangerouslySetInnerHTML={{ __html: renderedMarkup || '' }}
+        className={cx('preview-type-md')}
+      />
+
 
     </div>
   );
 };
 
-const mdit = new MarkdownIt();
-
-const MDPreview = () => {
-  var result = mdit.render(`# Test Title\nTest content`);
-
-  return (
-    <div
-      dangerouslySetInnerHTML={{ __html: result }}
-      className={cx('preview-type-md')}
-    />
-  );
-};

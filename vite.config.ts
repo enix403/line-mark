@@ -1,8 +1,11 @@
 import path from 'path';
 
 import { defineConfig } from 'vite'
+
 import react from '@vitejs/plugin-react'
 import tsconfigPaths from 'vite-tsconfig-paths';
+import legacy from '@vitejs/plugin-legacy'
+
 
 export default defineConfig(({ mode }) => {
   const isDevelopment = mode == 'development';
@@ -14,7 +17,8 @@ export default defineConfig(({ mode }) => {
 
     plugins: [
       tsconfigPaths({ loose: true }),
-      react()
+      react(),
+      legacy()
     ],
 
     build: {

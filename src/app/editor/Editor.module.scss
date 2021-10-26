@@ -1,3 +1,8 @@
+$panes-border-color: #363B3D;
+$bg-color: #181A1B;
+$fg-color: rgb(212, 209, 203);
+// $panes-border-color: #e8e8e8;
+
 .editor-main {
     width: 100%;
     height: 100%;
@@ -6,9 +11,11 @@
     flex-direction: row;
     align-items: stretch;
     justify-content: flex-start;
+
+    background-color: $bg-color;
+    color: $fg-color;
 }
 
-$panes-border-color: #e8e8e8;
 
 @mixin pane-header {
     width: 100%;
@@ -35,17 +42,22 @@ $panes-border-color: #e8e8e8;
     }
 }
 
+/* ==== Input pane ==== */
 
 .markdown-input-pane {
     flex: 1;
     border: 0;
     border-right: 1px solid $panes-border-color;
 
+    display: flex;
+    flex-direction: column;
+
     .input-header {
         @include pane-header;
     }
-
 }
+
+/* ==== Preview pane ==== */
 
 .markdown-preview-pane {
     flex: 1;
@@ -58,9 +70,10 @@ $panes-border-color: #e8e8e8;
     margin-left: auto;
     margin-bottom: 0;
 
+
     :global {
         .bp3-html-select {
-            border: 1px solid rgba(24, 32, 38, 0.2);
+            border: 1px solid $panes-border-color;
             border-radius: 3px;
         }
     }
@@ -74,8 +87,36 @@ $panes-border-color: #e8e8e8;
 
     overflow: scroll;
 
-    padding: 20px 10px;
+    padding: 20px 20px;
+    padding-bottom: 120px;
 
     font-family: "Fira Sans", sans-serif;
     font-size: 0.9rem;
 }
+
+@mixin all-md-rules {
+
+    > :first-child { margin-top: 0 !important; }
+
+    h1 {
+        padding-bottom: .3em;
+        font-size: 2em;
+        border-bottom: 1px solid #45494a;
+    }
+
+    h2 {
+        padding-bottom: .3em;
+        font-size: 1.5em;
+        border-bottom: 1px solid #45494a;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        margin-top: 24px;
+        margin-bottom: 16px;
+        font-weight: 600;
+        line-height: 1.25;
+    }
+}
+
+
+.preview-type-md { @include all-md-rules; }
