@@ -84,7 +84,7 @@ class MarkdownInputPane extends React.Component<IMarkdownInputPane, any> {
   }
 };
 
-const mdit = new MarkdownIt();
+const mdit = new MarkdownIt({ html: true });
 
 type RenderOutputType = 'html' | 'view';
 
