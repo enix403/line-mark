@@ -28,7 +28,7 @@ interface IMarkdownInputPane {
 };
 
 class MarkdownInputPane extends React.Component<IMarkdownInputPane, any> {
-  constructor(props) {
+  constructor(props: IMarkdownInputPane) {
     super(props);
 
     this.state = {
@@ -75,12 +75,13 @@ class MarkdownInputPane extends React.Component<IMarkdownInputPane, any> {
             enableSnippets: false,
             overwrite: false,
             spellcheck: false,
-            newLineMode: true
+            newLineMode: true,
+            fontFamily: "Fira Code"
           }}
+          fontSize={12}
           className={cx('input-editor')}
           width="100%"
           style={{ flex: 1, paddingBottom: 400 }}
-          fontSize={14}
           showPrintMargin={false}
           enableSnippets={false}
           enableBasicAutocompletion={false}
