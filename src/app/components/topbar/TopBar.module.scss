@@ -1,4 +1,13 @@
+@mixin fix-selection {
+    color: white;
+    background:#004075;
+}
+
 .top-bar {
+
+    ::-moz-selection { @include fix-selection; }
+    ::selection { @include fix-selection; }
+
     width: 100%;
     height: 50px;
     max-height: 50px;
@@ -10,7 +19,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: safe flex-start;
+    justify-content: flex-start;
 
     .title {
         font-weight: 700;

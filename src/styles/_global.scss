@@ -49,8 +49,20 @@ hr {
 /* | Actual App Styles | */
 /* ===================== */
 
+@mixin selection {
+    ::-moz-selection { @content; }
+    ::selection { @content; }
+}
+
+@include selection {
+    color: white;
+    // background: #004D35;
+    // background: #75006F;
+    background: #00755E;
+}
+
 * {
-    // font-family: 'Roboto', sans-serif;
+    font-family: "Fira Sans", sans-serif;
 }
 
 body {

@@ -3,7 +3,6 @@
 $panes-border-color: #363B3D;
 $bg-color: #181A1B;
 $fg-color: rgb(212, 209, 203);
-// $panes-border-color: #e8e8e8;
 
 $heading-border-color: #45494a;
 $table-border-color: #45494a;
@@ -24,7 +23,7 @@ $table-border-color: #45494a;
 }
 
 @mixin monospace-font {
-    font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
+    font-family: "Fira Code", sans-serif, ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
 }
 
 @mixin pane-header {
@@ -52,7 +51,7 @@ $table-border-color: #45494a;
     }
 }
 
-/* ==== Input pane ==== */
+/* ================================ Input pane ================================ */
 
 .markdown-input-pane {
     flex: 1;
@@ -67,9 +66,12 @@ $table-border-color: #45494a;
     .input-header {
         @include pane-header;
     }
+    .input-editor * {
+        @include monospace-font;
+    }
 }
 
-/* ==== Preview pane ==== */
+/* ================================ Preview pane ================================ */
 
 .markdown-preview-pane {
     flex: 1;
@@ -198,7 +200,7 @@ $table-border-color: #45494a;
         }
     }
 
-    tt, code:not(pre code) {
+    tt, code:not(& pre > code) {
         padding: .2em .4em;
         margin: 0;
         font-size: 85%;
