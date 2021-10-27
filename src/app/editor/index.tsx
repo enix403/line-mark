@@ -68,10 +68,19 @@ class MarkdownInputPane extends React.Component<IMarkdownInputPane, any> {
           onChange={this.updateCode}
           name="Markdown_Input"
           editorProps={{ $blockScrolling: false }}
+          setOptions={{
+            useWorker: false,
+            behavioursEnabled: false,
+            animatedScroll: true,
+            enableSnippets: false,
+            overwrite: false,
+            spellcheck: false,
+            newLineMode: true
+          }}
           className={cx('input-editor')}
           width="100%"
           style={{ flex: 1, paddingBottom: 400 }}
-          fontSize={12.5}
+          fontSize={14}
           showPrintMargin={false}
           enableSnippets={false}
           enableBasicAutocompletion={false}
